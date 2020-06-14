@@ -58,6 +58,7 @@ To build, simply launch QTCreator and open the project file:
 ``
 qtcreator AHRS.pro
 ``
+
 Once built, connect to the USB Serial port detected by the system.
 
 
