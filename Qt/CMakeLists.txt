@@ -18,10 +18,10 @@ endif()
 add_definitions( -DHAVE_QT)
 
 # Find the QtWidgets library
-find_package(Qt5 CONFIG REQUIRED Widgets)
+find_package(Qt5 CONFIG REQUIRED Widgets OpenGL SerialPort)
 
-set(project_SOURCES main.cpp ahrs_widgets.cpp ahrs_window.cpp AHRS.cpp)
+set(project_SOURCES main.cpp ahrs_widgets.cpp ahrs_window.cpp AHRS.cpp appearance_dialog.cpp MASI.cpp)
 
 add_executable(${PROJECT_NAME} ${project_SOURCES})
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
-qt5_use_modules(${PROJECT_NAME} Widgets)
+target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::OpenGL Qt5::SerialPort)
+qt5_use_modules(${PROJECT_NAME} Widgets OpenGL SerialPort)
