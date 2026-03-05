@@ -1,7 +1,9 @@
-# AHRS
-Attitude and Heading Reference System provides an interface for compass bearing/heading, and pose (yaw, pitch, roll), as well as navigation basics - GPS position, altitude, speed. Its the guts of what you would use for an aerospace control system. A reference Inertial Navigation System (INS) firmware is provided for testing and integration using Arduino and the Adafruit/Sparkfun libraries running on a Cortex M0 with the Sparkfun RTK GPS receivers, the Adafruit 9DOF sensor boards, and the Madgwick/Mahoney or NXP sensor fusion libraries are used for 9DOF IMU output in NED format. 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/06a6c42e-ad31-4f5f-ad7c-ac634dc5472a" />
 
-This software is a starting point for integrating both attitude/pose and centimeter level positioning into your system.
+# AHRS
+Attitude and Heading Reference System provides an interface for compass bearing/heading, and pose (yaw, pitch, roll), as well as navigation basics - GPS position, altitude, speed. Its the guts of what you would use for an aerospace control system or Heads-Up Display (HUD). A reference Inertial Navigation System (INS) firmware is provided for testing and integration using Arduino and the Adafruit/Sparkfun libraries running on a Cortex M0 with the Sparkfun RTK GPS receivers, the Adafruit 9DOF sensor boards, and the Madgwick/Mahoney or NXP sensor fusion libraries are used for 9DOF IMU output in NED format. A Serial and TCP/IP socket based emulator which simulates multiple vehicles (currently a Rocket) is provided for debugging, simulation and verification.
+
+This software is a starting point for integrating both attitude/pose and centimeter level positioning into your system as well as building higher level control systems. 
 
 
 # Supported Hardware
@@ -38,9 +40,6 @@ The below references are for the open source hardware designs used in this Ardui
 - [uBlox ZED-F9P RTK module from ublox](https://github.com/sparkfun/Qwiic_GPS-RTK2)
 
 
-
-
-
 # Software Prerequisites
 
 
@@ -63,7 +62,7 @@ Once built, connect to the USB Serial port detected by the system.
 
 ## Emulator
 
-A standalone **AHRS INS Emulator** is provided in the `emulator/` directory for testing the Qt UI without physical hardware. It runs a TCP server that streams simulated `$INS` telemetry, and implements a full rocket flight simulation using the Tsiolkovsky ideal rocket equation.
+A standalone **AHRS INS Emulator** is provided in the `emulator/` directory for testing the Qt UI without physical hardware. It runs a TCP server that streams simulated `$INS` telemetry, and implements a full rocket flight simulation using the [Tsiolkovsky](https://en.wikipedia.org/wiki/Konstantin_Tsiolkovsky) ideal rocket equation.
 
 Defaults are pre-configured for an **Aerotech N1000W** motor in a 12 lb airframe launched from **Blackrock Desert, Lovelock, NV (LLC319050)** at 4,000 ft MSL.
 
