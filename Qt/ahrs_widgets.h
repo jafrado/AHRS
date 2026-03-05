@@ -17,6 +17,7 @@
  */
 
 #include <QWidget>
+#include <QOpenGLWidget>
 #include <QLabel>
 #include <QMainWindow>
 #include <QBoxLayout>
@@ -30,7 +31,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-class AHRSAttitudeIndicator : public QWidget
+class AHRSAttitudeIndicator : public QOpenGLWidget
 {
     Q_OBJECT
 
@@ -61,6 +62,9 @@ public:
     double getRoll() { return roll; }
     double getPitch() { return pitch; }
 
+    void setInstrFont(const QFont &font);
+    void setLabelColor(const QColor &color);
+    void setDisplayScale(double scale);
 
 signals:
     void widgetReplot(void);
@@ -78,10 +82,14 @@ private:
     int offset;
     double roll;
     double pitch;
+    QString m_fontFamily;
+    int     m_labelSize;
+    QColor  m_labelColor;
+    double  m_displayScale;
 };
 
 
-class AHRSCompass : public QWidget
+class AHRSCompass : public QOpenGLWidget
 {
     Q_OBJECT
 
@@ -112,6 +120,13 @@ public:
     double getAlt() { return altitude; }
     double getH() { return msl; }
 
+    void setInstrFont(const QFont &font);
+    void setLabelColor(const QColor &color);
+    void setDisplayScale(double scale);
+
+    enum Units { Metric, Imperial };
+    void setUnits(Units u) { m_units = u; emit canvasReplot(); }
+
 signals:
     void canvasReplot(void);
 
@@ -129,6 +144,11 @@ protected:
     double  yaw;
     double  altitude;
     double  msl;
+    QString m_fontFamily;
+    int     m_labelSize;
+    QColor  m_labelColor;
+    double  m_displayScale;
+    Units   m_units;
 };
 
 
@@ -156,14 +176,34 @@ public:
     QLabel* ecefVY;
     QLabel* ecefVZ;
 
+    enum Units { Metric, Imperial };
+
     AHRSInfo(QWidget* parent = 0);
     ~AHRSInfo();
     void updatePosition(double lat, double lon);
+    void updateDRPosition(double lat, double lon, double altMslM);
     void updatePDOP(double pdop);
     void updateStatus(int siv, int fixType, int rtkType);
-    
+    void setFontScale(double scale);
+    void setFontFamily(const QString &family);
+    void setTextColor(const QColor &color);
+    void setUnits(Units u);
+
 signals:
 protected slots:
+
+private:
+    int     m_largePx;
+    int     m_smallPx;
+    QString m_fontFamily;
+    QColor  m_dataColor;
+    Units   m_units;
+    QLabel *m_drLat;
+    QLabel *m_drLon;
+    QLabel *m_drAlt;
+    void    applyStyles();
+    QString largeStyle(const QString &color = QString()) const;
+    QString smallStyle(const QString &color = QString()) const;
 
 
 };

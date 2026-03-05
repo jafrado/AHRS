@@ -1,0 +1,25 @@
+# Build output
+Qt/Debug/
+Qt/Release/
+Qt/x64/
+Qt/AHRS.dir/
+Qt/AHRS_autogen/
+Qt/CMakeFiles/
+Qt/CMakeCache.txt
+Qt/cmake_install.cmake
+build-*/
+
+# Generated Visual Studio / CMake project files
+Qt/*.sln
+Qt/*.vcxproj
+Qt/*.vcxproj.filters
+Qt/*.vcxproj.user
+Qt/ALL_BUILD.*
+Qt/ZERO_CHECK.*
+Qt/.vs/
+
+# Qt Creator user settings (local only)
+*.pro.user
+
+# Claude internal
+.claude/

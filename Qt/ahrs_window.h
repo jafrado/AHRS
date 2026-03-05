@@ -10,7 +10,25 @@ class AHRSWindow : public QMainWindow
 public:
     explicit AHRSWindow(QWidget* parent = 0);
     ~AHRSWindow();
-    void keyPressEvent(QKeyEvent* event) { return hud->keyPressEvent(event); }
+    void keyPressEvent(QKeyEvent* event) {
+        if (event->key() == Qt::Key_F11) {
+            if (isFullScreen()) {
+                showNormal();
+                menuBar()->show();
+                ui->mainToolBar->show();
+                ui->statusBar->show();
+                hud->deviceLabel->show();
+            } else {
+                menuBar()->hide();
+                ui->mainToolBar->hide();
+                ui->statusBar->hide();
+                hud->deviceLabel->hide();
+                showFullScreen();
+            }
+        } else {
+            hud->keyPressEvent(event);
+        }
+    }
     void closeEvent(QCloseEvent* event);
 
 public slots:
